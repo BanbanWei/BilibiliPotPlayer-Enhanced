@@ -1,0 +1,25 @@
+{
+	// 填写账号 Cookie（SESSDATA、DedeUserID、bili_jct 等）
+	// 注意：cookie 会过期。到期后播放直播会弹出二维码，扫码即可自动更新本文件并重启 PotPlayer。
+	// 也可以手动运行 Media/PlayParse/update-bilibili-cookie.ps1 更新
+	"cookie": "",
+	"maxliveroom": 200,
+	"danmaku": {
+		// 控制是否接收视频弹幕。按 Alt+H 可显示/隐藏弹幕
+		"enable": true,
+		"server": "https://subtitle.chen310.repl.co",
+		// 字体
+		"font": "微软雅黑",
+		// 字号
+		"fontSize": 30.0,
+		// 弹幕不透明度，取值范围 0.0 ~ 1.0
+		"opacity": 0.8,
+		// 弹幕显示区域大小，取值范围 0.0 ~ 1.0
+		"displayArea": 0.8,
+		// 弹幕显示时间
+		"stayTime": 15.0
+	},
+	// 播放单个视频时是否显示推荐的视频
+	"showRecommendedVideos": true,
+	"debug": false
+}
