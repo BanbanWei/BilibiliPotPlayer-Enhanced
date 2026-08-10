@@ -36,7 +36,7 @@
 
 ### Cookies 获取
 
-本修改版推荐**扫码登录**：Cookie 未填写或到期时，打开直播间/关注列表会自动弹出二维码，扫码即自动更新 Cookie 并重启 PotPlayer。也可手动运行 `Media\PlayParse\update-bilibili-cookie.ps1` 完成扫码登录。
+本修改版推荐**扫码登录**：启动 PotPlayer 时若检测到 Cookie 为空，会自动弹出二维码；Cookie 未填写或到期时，打开直播间/关注列表也会自动弹出二维码，扫码即自动更新 Cookie 并重启 PotPlayer。也可手动运行 `Media\PlayParse\update-bilibili-cookie.ps1` 完成扫码登录。
 
 手动获取 Cookie 可参考原版项目的[获取 Cookie 说明](https://github.com/chen310/BilibiliPotPlayer/issues/62#issuecomment-1841909583)。
 

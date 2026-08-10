@@ -23,11 +23,31 @@
 // array<dictionary> PlaylistParse(const string &in)	-> parse playlist
 
 Config ConfigData;
+string configPath;
+void showLoginQR();
 
 void OnInitialize() {
 	HostSetUrlHeaderHTTP("bilivideo.com", "Referer: https://www.bilibili.com\r\n");
 	HostSetUrlHeaderHTTP("bilivideo.cn", "Referer: https://www.bilibili.com\r\n");
 	HostSetUrlHeaderHTTP("bilibili.com", "Referer: https://www.bilibili.com\r\n");
+	if (loginPrompted) {
+		return;
+	}
+	string configFile = configPath;
+	if (configFile.empty()) {
+		configFile = HostGetExtensionFolder() + "\\Media\\PlayParse\\Bilibili_Config.json";
+	}
+	int fp = HostFileOpen(configFile);
+	if (fp > 0) {
+		string content = HostFileRead(fp, 10000);
+		HostFileClose(fp);
+		string ck = HostRegExpParse(content, "\"cookie\"\\s*:\\s*\"([^\"]*)\"");
+		if (ck.empty()) {
+			loginPrompted = true;
+			HostMessageBox("检测到哔哩哔哩 Cookie 为空，点击确定后将弹出登录二维码，扫码并确认后 PotPlayer 会自动重启。", "Bilibili 登录", 2, 0);
+			showLoginQR();
+		}
+	}
 }
 
 string host = "https://api.bilibili.com";
@@ -104,8 +124,14 @@ string ServerLogin(string User, string Pass)
 	}
 	ConfigData = ReadConfigFile(User);
 	configPathSet = true;
+	configPath = User;
 	if (ConfigData.debug) {
 		HostOpenConsole();
+	}
+	if (ConfigData.cookie.empty() && !loginPrompted) {
+		loginPrompted = true;
+		HostMessageBox("检测到哔哩哔哩 Cookie 为空，点击确定后将弹出登录二维码，扫码并确认后 PotPlayer 会自动重启。", "Bilibili 登录", 2, 0);
+		showLoginQR();
 	}
 
 	return "配置文件读取成功，修改完配置文件后需要重启 PotPlayer 才能生效";
