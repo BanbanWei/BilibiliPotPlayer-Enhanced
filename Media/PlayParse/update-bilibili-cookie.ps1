@@ -31,7 +31,7 @@ function Get-ConfigCookie {
 
 function Test-CookieValid {
     param([string]$Cookie)
-    $nav = & curl.exe -s -A $ua -H "Referer: https://www.bilibili.com/" -H "Cookie: $Cookie" "https://api.bilibili.com/x/web-interface/nav"
+    $nav = & curl.exe -s --ssl-no-revoke -A $ua -H "Referer: https://www.bilibili.com/" -H "Cookie: $Cookie" "https://api.bilibili.com/x/web-interface/nav"
     try {
         $n = $nav | ConvertFrom-Json
         if ($n.code -eq 0 -and $n.data.isLogin) { return $true }
@@ -53,7 +53,7 @@ if (-not $Force -and $oldCookie -and (Test-CookieValid $oldCookie)) {
 
 # 1. 生成二维码
 Write-Host "正在生成登录二维码..."
-$genRaw = & curl.exe -s -A $ua "https://passport.bilibili.com/x/passport-login/web/qrcode/generate"
+$genRaw = & curl.exe -s --ssl-no-revoke -A $ua "https://passport.bilibili.com/x/passport-login/web/qrcode/generate"
 $gen = $genRaw | ConvertFrom-Json
 if ($gen.code -ne 0) {
     Write-Host "生成二维码失败: $genRaw"
@@ -62,10 +62,15 @@ if ($gen.code -ne 0) {
 $qrUrl = $gen.data.url
 $key = $gen.data.qrcode_key
 
-# 2. 渲染二维码
+# 2. 渲染二维码（清理旧图，避免下载失败时残留过期二维码）
 $qrImgUrl = "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" + [uri]::EscapeDataString($qrUrl)
 $imgPath = Join-Path $env:TEMP "bilibili_qr_login.png"
-& curl.exe -s -o $imgPath $qrImgUrl
+Remove-Item $imgPath -ErrorAction SilentlyContinue
+& curl.exe -s --ssl-no-revoke --max-time 25 -o $imgPath $qrImgUrl
+if (-not (Test-Path $imgPath) -or (Get-Item $imgPath).Length -lt 100) {
+    Write-Host "二维码图片下载失败，重试一次"
+    & curl.exe -s --ssl-no-revoke --max-time 25 -o $imgPath $qrImgUrl
+}
 
 # 显示二维码窗口（自带窗口，登录成功/超时/手动关闭后自动关闭）
 Add-Type -AssemblyName System.Windows.Forms
@@ -194,7 +199,7 @@ for ($i = 0; $i -lt 180; $i++) {
         }
     }
     Remove-Item $bodyFile, $hdrFile -ErrorAction SilentlyContinue
-    & curl.exe -s -A $ua -D $hdrFile -o $bodyFile "https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=$key" | Out-Null
+    & curl.exe -s --ssl-no-revoke -A $ua -D $hdrFile -o $bodyFile "https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=$key" | Out-Null
     if (-not (Test-Path $bodyFile)) { continue }
 
     $poll = (Get-Content -Raw -Encoding UTF8 $bodyFile) | ConvertFrom-Json
@@ -262,7 +267,7 @@ $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 [System.IO.File]::WriteAllText($configPath, $newRaw, $utf8NoBom)
 
 # 6. 验证新 cookie
-$nav = & curl.exe -s -A $ua -H "Referer: https://www.bilibili.com/" -H "Cookie: $newCookie" "https://api.bilibili.com/x/web-interface/nav"
+$nav = & curl.exe -s --ssl-no-revoke -A $ua -H "Referer: https://www.bilibili.com/" -H "Cookie: $newCookie" "https://api.bilibili.com/x/web-interface/nav"
 $n = $nav | ConvertFrom-Json
 if ($n.data.isLogin) {
     Write-Host "登录成功: $($n.data.uname) (uid=$($n.data.mid))"
