@@ -26,17 +26,17 @@
 
 ## 登录
 
-找到刚刚复制过去的配置文件 `Bilibili_Config.json`，填写 Cookie 等设置内容。 打开 PotPlayer，按 <kbd>F5</kbd> 打开选项，点击`扩展功能`下的`媒体播放列表/项目`，再点击 `Bilibili`，然后打开`账户设置`，填写配置文件路径，如 `D:\DAUM\PotPlayer\Extension\Media\PlayParse\Bilibili_Config.json`。每次修改完配置文件，可能都要重启 PotPlayer 才能生效。
+打开 PotPlayer，按 <kbd>F5</kbd> 打开选项，点击`扩展功能`下的`媒体播放列表/项目`，再点击 `Bilibili`，然后打开`账户设置`，填写配置文件路径，如 `D:\DAUM\PotPlayer\Extension\Media\PlayParse\Bilibili_Config.json`。重启后出现bilibili二维码弹窗，扫码登录即可。（也可找到刚刚复制过去的配置文件 `Bilibili_Config.json`，手动填写 Cookie 等设置内容。） 
 
 ![Settings](https://cdn.jsdelivr.net/gh/chen310/BilibiliPotPlayer/public/settings.png)
 
-点击测试按钮，如果弹出账号信息，就说明登录成功。
+登录后在页面点击测试按钮，如果弹出账号信息，就说明登录成功。
 
 ![Test](https://cdn.jsdelivr.net/gh/chen310/BilibiliPotPlayer/public/test.png)
 
 ### Cookies 获取
 
-本修改版推荐**扫码登录**：Cookie 到期或未填写时，打开直播间/关注列表会自动弹出二维码，扫码即自动更新 Cookie 并重启 PotPlayer。也可手动运行 `Media\PlayParse\update-bilibili-cookie.ps1` 完成扫码登录。
+本修改版推荐**扫码登录**：Cookie 未填写或到期时，打开直播间/关注列表会自动弹出二维码，扫码即自动更新 Cookie 并重启 PotPlayer。也可手动运行 `Media\PlayParse\update-bilibili-cookie.ps1` 完成扫码登录。
 
 手动获取 Cookie 可参考原版项目的[获取 Cookie 说明](https://github.com/chen310/BilibiliPotPlayer/issues/62#issuecomment-1841909583)。
 
