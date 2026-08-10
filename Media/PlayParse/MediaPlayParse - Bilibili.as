@@ -24,7 +24,14 @@
 
 Config ConfigData;
 string configPath;
-void showLoginQR();
+
+bool loginPrompted = false;
+bool configPathSet = false;
+
+void showLoginQR() {
+	string vbs = HostGetExtensionFolder() + "\\Media\\PlayParse\\bilibili-login.vbs";
+	HostExecuteProgram("wscript.exe", "\"" + vbs + "\"");
+}
 
 void OnInitialize() {
 	HostSetUrlHeaderHTTP("bilivideo.com", "Referer: https://www.bilibili.com\r\n");
@@ -1090,9 +1097,6 @@ bool checkCookie() {
 	return true;
 }
 
-bool loginPrompted = false;
-bool configPathSet = false;
-
 bool needLogin() {
 	if (ConfigData.cookie.empty()) {
 		return true;
@@ -1111,11 +1115,6 @@ bool handleLogin() {
 		return true;
 	}
 	return false;
-}
-
-void showLoginQR() {
-	string vbs = HostGetExtensionFolder() + "\\Media\\PlayParse\\bilibili-login.vbs";
-	HostExecuteProgram("wscript.exe", "\"" + vbs + "\"");
 }
 
 array<dictionary> followingLive(uint page) {
