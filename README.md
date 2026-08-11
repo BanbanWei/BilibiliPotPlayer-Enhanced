@@ -6,7 +6,6 @@
 >
 > - **直播画质修复**：改用新版 `getRoomPlayInfo` 接口，登录后直播可播放原画/高帧率（原版只能到超清）
 > - **Cookie 扫码自动登录**：Cookie 到期（或未填写）时打开直播会自动弹出扫码二维码，用哔哩哔哩 App 扫码后自动写回 Cookie 并重启 PotPlayer，无需手动复制
-> - **关注直播自动刷新**：后台每 60 秒检查一次关注列表，出现新的开播时自动刷新 PotPlayer 的关注直播列表
 > - **二维码窗口跟随系统深色主题**：无边框自定义窗口（深色标题栏、可拖动），随 Windows 明暗主题切换，扫码脚本通过 VBScript 隐藏启动，不闪现控制台
 >
 > 其余功能与原版一致，以下为原版说明。
@@ -15,7 +14,7 @@
 
 [下载项目](https://github.com/BanbanWei/BilibiliPotPlayer-Enhanced/archive/refs/heads/main.zip)
 
-将项目 `Media/PlayParse` 路径下的 `MediaPlayParse - Bilibili.as`、`MediaPlayParse - Bilibili.ico`、`Bilibili_Config.json`、`update-bilibili-cookie.ps1`、`bilibili-login.vbs`、`follow-live-watcher.ps1` 和 `follow-live-watcher.vbs` 七个文件复制到 `{PotPlayer 安装路径}\Extension\Media\PlayParse` 文件夹下。
+将项目 `Media/PlayParse` 路径下的 `MediaPlayParse - Bilibili.as`、`MediaPlayParse - Bilibili.ico`、`Bilibili_Config.json`、`update-bilibili-cookie.ps1` 和 `bilibili-login.vbs` 五个文件复制到 `{PotPlayer 安装路径}\Extension\Media\PlayParse` 文件夹下。
 
 `MediaPlayParse - Bilibili.as` 提供了解析 `Bilibili` 链接的功能。
 

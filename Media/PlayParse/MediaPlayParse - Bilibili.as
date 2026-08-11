@@ -33,22 +33,10 @@ void showLoginQR() {
 	HostExecuteProgram("wscript.exe", "\"" + vbs + "\"");
 }
 
-bool watcherStarted = false;
-
-void startFollowWatcher() {
-	if (watcherStarted) {
-		return;
-	}
-	watcherStarted = true;
-	string vbs = HostGetExtensionFolder() + "\\Media\\PlayParse\\follow-live-watcher.vbs";
-	HostExecuteProgram("wscript.exe", "\"" + vbs + "\"");
-}
-
 void OnInitialize() {
 	HostSetUrlHeaderHTTP("bilivideo.com", "Referer: https://www.bilibili.com\r\n");
 	HostSetUrlHeaderHTTP("bilivideo.cn", "Referer: https://www.bilibili.com\r\n");
 	HostSetUrlHeaderHTTP("bilibili.com", "Referer: https://www.bilibili.com\r\n");
-	startFollowWatcher();
 	if (loginPrompted) {
 		return;
 	}

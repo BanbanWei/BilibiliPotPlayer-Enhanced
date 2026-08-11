@@ -3,8 +3,6 @@
 	// 娉ㄦ剰锛歝ookie 浼氳繃鏈熴€傚埌鏈熷悗鎾斁鐩存挱浼氬脊鍑轰簩缁寸爜锛屾壂鐮佸嵆鍙嚜鍔ㄦ洿鏂版湰鏂囦欢骞堕噸鍚?PotPlayer銆?	// 涔熷彲浠ユ墜鍔ㄨ繍琛?Media/PlayParse/update-bilibili-cookie.ps1 鏇存柊
 	"cookie": "",
 	"maxliveroom": 200,
-	// 是否自动监视关注直播：每 60 秒检查一次，出现新的开播时自动刷新关注直播列表
-	"autoRefreshFollowLive": true,
 	"danmaku": {
 		// 鎺у埗鏄惁鎺ユ敹瑙嗛寮瑰箷銆傛寜 Alt+H 鍙樉绀?闅愯棌寮瑰箷
 		"enable": true,
