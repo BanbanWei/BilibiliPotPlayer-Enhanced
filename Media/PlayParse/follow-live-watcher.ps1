@@ -11,6 +11,13 @@ $configPath = Join-Path $PSScriptRoot "Bilibili_Config.json"
 $ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 $followUrl = "https://link.bilibili.com/p/center/index#/user-center/follow/1"
 
+# 单实例：已有监视脚本在运行则退出（避免多次启动 PotPlayer 后累积多个脚本）
+$me = $PID
+$existing = Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" | Where-Object { $_.ProcessId -ne $me -and $_.CommandLine -like "*follow-live-watcher*" }
+if ($existing) {
+    exit 0
+}
+
 if (-not (Test-Path $configPath)) {
     exit 0
 }
