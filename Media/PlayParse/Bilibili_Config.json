@@ -1,25 +1,26 @@
 {
-	// 填写账号 Cookie（SESSDATA、DedeUserID、bili_jct 等）
-	// 注意：cookie 会过期。到期后播放直播会弹出二维码，扫码即可自动更新本文件并重启 PotPlayer。
-	// 也可以手动运行 Media/PlayParse/update-bilibili-cookie.ps1 更新
+	// 濉啓璐﹀彿 Cookie锛圫ESSDATA銆丏edeUserID銆乥ili_jct 绛夛級
+	// 娉ㄦ剰锛歝ookie 浼氳繃鏈熴€傚埌鏈熷悗鎾斁鐩存挱浼氬脊鍑轰簩缁寸爜锛屾壂鐮佸嵆鍙嚜鍔ㄦ洿鏂版湰鏂囦欢骞堕噸鍚?PotPlayer銆?	// 涔熷彲浠ユ墜鍔ㄨ繍琛?Media/PlayParse/update-bilibili-cookie.ps1 鏇存柊
 	"cookie": "",
 	"maxliveroom": 200,
+	// 是否自动监视关注直播：每 60 秒检查一次，出现新的开播时自动刷新关注直播列表
+	"autoRefreshFollowLive": true,
 	"danmaku": {
-		// 控制是否接收视频弹幕。按 Alt+H 可显示/隐藏弹幕
+		// 鎺у埗鏄惁鎺ユ敹瑙嗛寮瑰箷銆傛寜 Alt+H 鍙樉绀?闅愯棌寮瑰箷
 		"enable": true,
 		"server": "https://subtitle.chen310.repl.co",
-		// 字体
-		"font": "微软雅黑",
-		// 字号
+		// 瀛椾綋
+		"font": "寰蒋闆呴粦",
+		// 瀛楀彿
 		"fontSize": 30.0,
-		// 弹幕不透明度，取值范围 0.0 ~ 1.0
+		// 寮瑰箷涓嶉€忔槑搴︼紝鍙栧€艰寖鍥?0.0 ~ 1.0
 		"opacity": 0.8,
-		// 弹幕显示区域大小，取值范围 0.0 ~ 1.0
+		// 寮瑰箷鏄剧ず鍖哄煙澶у皬锛屽彇鍊艰寖鍥?0.0 ~ 1.0
 		"displayArea": 0.8,
-		// 弹幕显示时间
+		// 寮瑰箷鏄剧ず鏃堕棿
 		"stayTime": 15.0
 	},
-	// 播放单个视频时是否显示推荐的视频
+	// 鎾斁鍗曚釜瑙嗛鏃舵槸鍚︽樉绀烘帹鑽愮殑瑙嗛
 	"showRecommendedVideos": true,
 	"debug": false
 }
