@@ -66,17 +66,13 @@ function Get-PotPlayerExe {
 }
 
 $prev = $null
-$closedRounds = 0
 while ($true) {
     Start-Sleep -Seconds $Interval
 
     $running = Get-Process -Name "PotPlayerMini64","PotPlayerMini" -ErrorAction SilentlyContinue
     if (-not $running) {
-        $closedRounds++
-        if ($closedRounds -ge 5) { exit 0 }
-        continue
+        exit 0
     }
-    $closedRounds = 0
 
     try {
         $current = Get-LiveRoomIds
